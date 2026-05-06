@@ -6,7 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Index Page</h2>
-    <a href="login.php">Go to Login Page</a><br>
+    <h2>Student Dashboard</h2>
 </body>
 </html>
