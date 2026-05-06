@@ -1,3 +1,6 @@
+<?php
+require 'conn.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +9,7 @@
     <title>Document</title>
 </head>
 <body>
+
     <h2>Index Page</h2>
     <a href="login.php">Go to Login Page</a><br>
 </body>
