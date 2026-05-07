@@ -17,7 +17,7 @@
                     <h3>Login</h3>
                 </div>
                 <div class="card-body">
-                    <form action="authenticate_dup.php" method="post">
+                    <form action="authentication.php" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" id="username" name="username" class="form-control" required>
@@ -38,6 +38,9 @@
                             <button type="submit" name="login" class="btn btn-primary">Login</button>
                         </div>
                     </form>
+                    <div class="mb-3">
+                        <p>Don't have an account? <a href="userRegister.php">Register here</a></p>
+                    </div>
                 </div>
             </div>
         </div>
