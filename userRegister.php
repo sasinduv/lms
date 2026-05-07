@@ -1,32 +1,52 @@
 <?php
-// register.php
-require_once 'conn.php';
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+require_once 'conn.php';
 
 $message = "";
 
-if (isset($_POST['register'])) {
-
+if(isset($_POST['register']))
+{
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
     $role = trim($_POST['role']);
 
-    // Hash password using SHA256
     $hashed_password = hash('sha256', $password);
 
-    // Insert query
-    $sql = "INSERT INTO users (username, password, role) 
-            VALUES ('$username', '$hashed_password', '$role')";
+    // Check username already exists
+    $check = "SELECT * FROM users WHERE username='$username'";
+    $result = mysqli_query($conn, $check);
 
-    if (mysqli_query($conn, $sql)) {
-        $message = "User Registered Successfully";
-    } else {
-        $message = "Error: " . mysqli_error($conn);
+    if(mysqli_num_rows($result) > 0)
+    {
+        $message = "Username already exists!";
+    }
+    else
+    {
+        // Insert into users table
+        $sql = "INSERT INTO users(username,password,role)
+                VALUES('$username','$hashed_password','$role')";
+
+        if(mysqli_query($conn, $sql))
+        {
+
+            // If student create empty profile row
+            if($role == "student")
+            {
+                $studentSql = "INSERT INTO students(username)
+                               VALUES('$username')";
+
+                mysqli_query($conn, $studentSql);
+            }
+
+            $message = "User Registered Successfully";
+        }
+        else
+        {
+            $message = "Registration Failed";
+        }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
